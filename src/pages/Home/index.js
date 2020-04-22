@@ -1,83 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md'
 import { ProductList } from './styles'
-
+import { format } from '../../util/format'
+import api from '../../services/api'
 
 function Home() {
+
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await api.get('products')
+
+            const data = response.data.map(product => ({
+                ...product,
+                priceFormatted: format(product.price)
+            }))
+
+            setProducts(...products, data)
+        }
+        fetchData()
+    }, [])
+
     return (
         <ProductList>
-            <li>
-                <img src="https://images2.kabum.com.br/produtos/fotos/68082/68082_index_gg.jpg" alt="" />
-                <strong>Headset Thermaltake Sposts Shock 3D 7.1 USB Black HT-RSO-DIECBK-13</strong>
-                <span>R$ 477,53</span>
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#fff" />
-                    </div>
 
-                    <span>Added to my cart</span>
-                </button>
-            </li>
-            <li>
-                <img src="https://images2.kabum.com.br/produtos/fotos/68082/68082_index_gg.jpg" alt="" />
-                <strong>Headset Thermaltake Sposts Shock 3D 7.1 USB Black HT-RSO-DIECBK-13</strong>
-                <span>R$ 477,53</span>
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#fff" />
-                    </div>
+            {products.map(prod => (
+                <li key={prod.id}>
+                    <img src={prod.image} alt="" />
+                    <strong>{prod.title}</strong>
+                    <span>{prod.priceFormatted}</span>
+                    <button type="button">
+                        <div>
+                            <MdAddShoppingCart size={16} color="#fff" />
+                        </div>
 
-                    <span>Added to my cart</span>
-                </button>
-            </li>
-            <li>
-                <img src="https://images2.kabum.com.br/produtos/fotos/68082/68082_index_gg.jpg" alt="" />
-                <strong>Headset Thermaltake Sposts Shock 3D 7.1 USB Black HT-RSO-DIECBK-13</strong>
-                <span>R$ 477,53</span>
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#fff" />
-                    </div>
+                        <span>Added to my cart</span>
+                    </button>
+                </li>
+            ))}
 
-                    <span>Added to my cart</span>
-                </button>
-            </li>
-            <li>
-                <img src="https://images2.kabum.com.br/produtos/fotos/68082/68082_index_gg.jpg" alt="" />
-                <strong>Headset Thermaltake Sposts Shock 3D 7.1 USB Black HT-RSO-DIECBK-13</strong>
-                <span>R$ 477,53</span>
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#fff" />
-                    </div>
-
-                    <span>Added to my cart</span>
-                </button>
-            </li>
-            <li>
-                <img src="https://images2.kabum.com.br/produtos/fotos/68082/68082_index_gg.jpg" alt="" />
-                <strong>Headset Thermaltake Sposts Shock 3D 7.1 USB Black HT-RSO-DIECBK-13</strong>
-                <span>R$ 477,53</span>
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#fff" />
-                    </div>
-
-                    <span>Added to my cart</span>
-                </button>
-            </li>
-            <li>
-                <img src="https://images2.kabum.com.br/produtos/fotos/68082/68082_index_gg.jpg" alt="" />
-                <strong>Headset Thermaltake Sposts Shock 3D 7.1 USB Black HT-RSO-DIECBK-13</strong>
-                <span>R$ 477,53</span>
-                <button type="button">
-                    <div>
-                        <MdAddShoppingCart size={16} color="#fff" />
-                    </div>
-
-                    <span>ADDED TO MY CART</span>
-                </button>
-            </li>
         </ProductList>
     )
 

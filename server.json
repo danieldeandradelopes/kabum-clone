@@ -1,0 +1,66 @@
+{
+    "stock": [
+        {
+            "id": 1,
+            "amount": 3
+        },
+        {
+            "id": 2,
+            "amount": 5
+        },
+        {
+            "id": 3,
+            "amount": 2
+        },
+        {
+            "id": 4,
+            "amount": 1
+        },
+        {
+            "id": 5,
+            "amount": 5
+        },
+        {
+            "id": 6,
+            "amount": 10
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "title": "Placa de Vídeo Gigabyte NVIDIA GeForce GTX 1660 OC 6G, GDDR5 - GV-N1660OC-6GD",
+            "price": 1682.24,
+            "image": "https://images9.kabum.com.br/produtos/fotos/101039/101039_1554739787_index_gg.jpg"
+        },
+        {
+            "id": 2,
+            "title": "Placa de Vídeo Afox AMD Radeon RX560D, 4GB, GDDR5 - AFRX560D-4096D5H4-V3",
+            "price": 588.12,
+            "image": "https://images3.kabum.com.br/produtos/fotos/111203/placa-de-video-afox-amd-radeon-rx560d-4gb-gddr5-afrx560d-4096d5h4-v3_1584111274_gg.jpg"
+        },
+        {
+            "id": 3,
+            "title": "Pen Drive Kingston DataTraveler USB 3.0 64GB - DT100G3/64GB",
+            "price": 58.71,
+            "image": "https://images9.kabum.com.br/produtos/fotos/74869/74869_1_1522243203_gg.jpg"
+        },
+        {
+            "id": 5,
+            "title": "Monitor Gamer Acer LED 24´ Widescreen, Full HD, HDMI/VGA, 75Hz, 1ms - KG241 BII",
+            "price": 822.11,
+            "image": "https://images5.kabum.com.br/produtos/fotos/101625/monitor-gamer-acer-led-24-widescreen-full-hd-hdmi-vga-75hz-1ms-kg241-bb1_monitor-gamer-acer-led-24-widescreen-full-hd-hdmi-vga-75hz-1ms-kg241-bb1_1561118627_gg.jpg"
+        },
+        {
+            "id": 6,
+            "title": "Console Microsoft Xbox One S 1TB Branco + PES 2020 - 234-01120",
+            "price": 1999.99,
+            "image": "https://images5.kabum.com.br/produtos/fotos/107475/console-microsoft-xbox-one-s-1tb-branco-pes-2020-234-01120_1574172777_gg.jpg"
+        },
+        {
+            "id": 4,
+            "title": "Smartphone Samsung Galaxy A20, 32GB, 13MP, Tela 6.4´, Preto - SM-A205G/32DL",
+            "price": 1033.22,
+            "image": "https://images5.kabum.com.br/produtos/fotos/101345/101345_1555075166_index_gg.jpg"
+        }
+    ]
+}
