@@ -4,6 +4,8 @@ import { MdAddShoppingCart } from 'react-icons/md'
 import { ProductList } from './styles'
 import { format } from '../../util/format'
 import api from '../../services/api'
+import * as CardActions from '../../store/modules/cart/actions'
+import { bindActionCreators } from 'redux';
 
 function Home(props) {
 
@@ -11,12 +13,9 @@ function Home(props) {
 
     const handleAddProduct = (product) => {
 
-        const { dispatch } = props;
+        const { addToCart } = props;
 
-        dispatch({
-            type: 'ADD_TO_CART',
-            product,
-        });
+        addToCart(product);
     }
 
     useEffect(() => {
@@ -57,5 +56,7 @@ function Home(props) {
 
 }
 
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(CardActions, dispatch)
 
-export default connect()(Home);
+export default connect(null, mapDispatchToProps)(Home);

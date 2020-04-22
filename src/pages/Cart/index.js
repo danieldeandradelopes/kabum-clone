@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux'
 import { MdRemoveCircleOutline, MdAddCircleOutline, MdDelete } from 'react-icons/md'
 import { Container, ProductsTable, Total } from "./style";
-function Cart() {
+import { format } from '../../util/format'
+import * as CardActions from '../../store/modules/cart/actions'
+import { bindActionCreators } from 'redux';
+
+
+function Cart({ cart, removeFromCart }) {
+
+    const [amount, setAmount] = useState(0)
+
+    const handleDeleteProduct = (id) => {
+
+        removeFromCart(id);
+    }
+
+
     return (
         <Container>
             <ProductsTable>
@@ -15,34 +30,41 @@ function Cart() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <img src="https://images2.kabum.com.br/produtos/fotos/68082/68082_index_gg.jpg" />
-                        </td>
-                        <td>
-                            <strong>Headset Thermaltake Sposts Shock 3D 7.1 USB Black HT-RSO-DIECBK-13</strong>
-                            <span>R$ 477.53</span>
-                        </td>
-                        <td>
-                            <div>
-                                <button type="button">
-                                    <MdRemoveCircleOutline size={20} color="#E06500" />
-                                </button>
-                                <input type="number" readOnly value={1} />
-                                <button type="button">
-                                    <MdAddCircleOutline size={20} color="#E06500" />
-                                </button>
-                            </div>
-                        </td>
-                        <td>
-                            <strong>R$ 800,00</strong>
-                        </td>
-                        <td>
-                            <button type="button">
-                                <MdDelete size={20} color="#E06500" />
-                            </button>
-                        </td>
-                    </tr>
+
+                    {
+                        cart.map(item => (
+
+                            <tr key={item.id}>
+                                <td>
+                                    <img src={item.image} />
+                                </td>
+                                <td>
+                                    <strong>{item.title}</strong>
+                                    <span>{item.priceFormatted}</span>
+                                </td>
+                                <td>
+                                    <div>
+                                        <button type="button">
+                                            <MdRemoveCircleOutline size={20} color="#E06500" />
+                                        </button>
+                                        <input type="number" readOnly value={item.amount} />
+                                        <button type="button">
+                                            <MdAddCircleOutline size={20} color="#E06500" />
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <strong>{item.priceFormatted}</strong>
+                                </td>
+                                <td>
+                                    <button type="button">
+                                        <MdDelete size={20} color="#E06500" onClick={() => handleDeleteProduct(item.id)} />
+                                    </button>
+                                </td>
+                            </tr>
+
+                        ))
+                    }
                 </tbody>
             </ProductsTable>
 
@@ -51,12 +73,18 @@ function Cart() {
 
                 <Total>
                     <span>Total</span>
-                    <strong>R$ 477.53</strong>
+                    <strong>R$ {amount}</strong>
                 </Total>
             </footer>
         </Container>
     )
 }
 
+const mapStateToProps = state => ({
+    cart: state.cart
+})
 
-export default Cart;
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(CardActions, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
