@@ -7,9 +7,17 @@ import * as CardActions from '../../store/modules/cart/actions'
 import { bindActionCreators } from 'redux';
 
 
-function Cart({ cart, removeFromCart }) {
+function Cart({ cart, removeFromCart, updateAmount }) {
 
     const [amount, setAmount] = useState(0)
+
+    const increment = (product) => {
+        updateAmount(product.id, product.amount + 1)
+    }
+
+    const decrement = (product) => {
+        updateAmount(product.id, product.amount - 1)
+    }
 
     const handleDeleteProduct = (id) => {
 
@@ -22,9 +30,6 @@ function Cart({ cart, removeFromCart }) {
             <ProductsTable>
                 <thead>
                     <tr>
-                        <th />
-                        <th>Product</th>
-                        <th>Quantity</th>
                         <th>Subtotal</th>
                         <th />
                     </tr>
@@ -44,11 +49,11 @@ function Cart({ cart, removeFromCart }) {
                                 </td>
                                 <td>
                                     <div>
-                                        <button type="button">
+                                        <button type="button" onClick={() => decrement(item)}>
                                             <MdRemoveCircleOutline size={20} color="#E06500" />
                                         </button>
                                         <input type="number" readOnly value={item.amount} />
-                                        <button type="button">
+                                        <button type="button" onClick={() => increment(item)} >
                                             <MdAddCircleOutline size={20} color="#E06500" />
                                         </button>
                                     </div>
