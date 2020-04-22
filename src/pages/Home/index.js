@@ -11,11 +11,11 @@ function Home(props) {
 
     const [products, setProducts] = useState([])
 
-    const handleAddProduct = (product) => {
+    const handleAddProduct = (id) => {
 
-        const { addToCart } = props;
+        const { addToCartRequest } = props;
 
-        addToCart(product);
+        addToCartRequest(id);
     }
 
     useEffect(() => {
@@ -43,7 +43,7 @@ function Home(props) {
                     <img src={prod.image} alt="" />
                     <strong>{prod.title}</strong>
                     <span>{prod.priceFormatted}</span>
-                    <button type="button" onClick={() => handleAddProduct(prod)}>
+                    <button type="button" onClick={() => handleAddProduct(prod.id)}>
                         <div>
                             <MdAddShoppingCart size={16} color="#fff" /> {amount[prod.id] || 0}
                         </div>
