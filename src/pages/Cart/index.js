@@ -7,9 +7,7 @@ import * as CardActions from '../../store/modules/cart/actions'
 import { bindActionCreators } from 'redux';
 
 
-function Cart({ cart, removeFromCart, updateAmount }) {
-
-    const [amount, setAmount] = useState(0)
+function Cart({ cart, total, removeFromCart, updateAmount }) {
 
     const increment = (product) => {
         updateAmount(product.id, product.amount + 1)
@@ -59,7 +57,7 @@ function Cart({ cart, removeFromCart, updateAmount }) {
                                     </div>
                                 </td>
                                 <td>
-                                    <strong>{item.priceFormatted}</strong>
+                                    <strong>{item.subTotal}</strong>
                                 </td>
                                 <td>
                                     <button type="button">
@@ -78,7 +76,7 @@ function Cart({ cart, removeFromCart, updateAmount }) {
 
                 <Total>
                     <span>Total</span>
-                    <strong>R$ {amount}</strong>
+                    <strong>{total}</strong>
                 </Total>
             </footer>
         </Container>
@@ -86,7 +84,15 @@ function Cart({ cart, removeFromCart, updateAmount }) {
 }
 
 const mapStateToProps = state => ({
-    cart: state.cart
+    cart: state.cart.map(product => ({
+        ...product,
+        subTotal: format(product.price * product.amount)
+    })),
+    total: format(
+        state.cart.reduce((total, product) => {
+            return total + product.price * product.amount
+        }, 0)
+    )
 })
 
 const mapDispatchToProps = dispatch =>

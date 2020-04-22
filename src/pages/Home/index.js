@@ -33,6 +33,8 @@ function Home(props) {
 
     }, [])
 
+    const { amount } = props;
+
     return (
         <ProductList>
 
@@ -43,7 +45,7 @@ function Home(props) {
                     <span>{prod.priceFormatted}</span>
                     <button type="button" onClick={() => handleAddProduct(prod)}>
                         <div>
-                            <MdAddShoppingCart size={16} color="#fff" />
+                            <MdAddShoppingCart size={16} color="#fff" /> {amount[prod.id] || 0}
                         </div>
 
                         <span>Added to my cart</span>
@@ -56,7 +58,15 @@ function Home(props) {
 
 }
 
+const mapStateToProps = state => ({
+    amount: state.cart.reduce((amount, product) => {
+        amount[product.id] = product.amount
+        return amount;
+    }, {})
+});
+
+
 const mapDispatchToProps = dispatch =>
     bindActionCreators(CardActions, dispatch)
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
